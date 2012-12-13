@@ -6,6 +6,7 @@
 # Wed Apr 25 20:50:00 EDT 2007
 #
 
+require_relative 'helper'
 require 'test/unit'
 require 'rools'
 require 'rools/base'
@@ -21,12 +22,12 @@ require 'logger'
         return name
       end
     end
-    
+
 class RulesTest < Test::Unit::TestCase
   def setup
     #Rools::Base.logger = Logger.new(STDOUT)
   end
-  
+
   def test_hello
     rules = Rools::RuleSet.new do
 		rule 'Hello' do
@@ -34,14 +35,14 @@ class RulesTest < Test::Unit::TestCase
 			consequence { puts "Hello, Rools!" }
 		end
 	end
-	
+
 	status = rules.assert 'Heya'
 	#puts "executed: #{rules.num_executed}"
 	assert status == :pass
 	assert rules.num_executed == 1
 	assert rules.num_evaluated == 1
   end
-  
+
   def test_file
 	rules  = Rools::RuleSet.new 'test/data/hello.rb'
 	status = rules.assert 'Heya'
@@ -49,7 +50,7 @@ class RulesTest < Test::Unit::TestCase
 	assert rules.num_executed == 1
 	assert rules.num_evaluated == 1
   end
-  
+
   def test_object
     rules = Rools::RuleSet.new do
       rule 'Programmer' do
@@ -69,6 +70,6 @@ class RulesTest < Test::Unit::TestCase
 	assert status == :pass
 	assert rules.num_executed == 1
 	assert rules.num_evaluated == 2
-	
+
   end
 end

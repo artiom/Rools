@@ -1,3 +1,4 @@
+require_relative 'helper'
 require 'test/unit'
 require 'rools'
 require 'rools/base'
@@ -7,9 +8,9 @@ class RoolzTest < Test::Unit::TestCase
   def setup
     Rools::Base.logger = Logger.new(STDOUT)
   end
-  
+
   def test_roolz
-  
+
     rules = Rools::RuleSet.new do
         rule 'Hello' do
             parameter String
@@ -20,12 +21,12 @@ class RoolzTest < Test::Unit::TestCase
             consequence { puts "Morning Rools !" }
         end
     end
-    
+
     puts "1 :"
     rules.assert 'Heya'
-    
+
     rules.delete_facts
-    
+
     puts "2 :"
     rules.assert -12
   end
